@@ -17,6 +17,8 @@
 		CF9E404C2B603228001D2C13 /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E404B2B603227001D2C13 /* ServiceRequest.swift */; };
 		CF9E404E2B60325B001D2C13 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E404D2B60325B001D2C13 /* RequestError.swift */; };
 		CF9E40502B603315001D2C13 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E404F2B603315001D2C13 /* Router.swift */; };
+		CF9E40542B603A24001D2C13 /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E40532B603A24001D2C13 /* HeroModel.swift */; };
+		CF9E40572B603DDA001D2C13 /* HeroService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E40562B603DDA001D2C13 /* HeroService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		CF9E404B2B603227001D2C13 /* ServiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRequest.swift; sourceTree = "<group>"; };
 		CF9E404D2B60325B001D2C13 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		CF9E404F2B603315001D2C13 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		CF9E40532B603A24001D2C13 /* HeroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
+		CF9E40562B603DDA001D2C13 /* HeroService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 		CF9E401F2B602D8B001D2C13 /* Marvel-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				CF9E40512B6039D0001D2C13 /* Hero */,
 				CF9E404A2B6031F9001D2C13 /* Service */,
 				CF9E40202B602D8B001D2C13 /* Marvel_SwiftUIApp.swift */,
 				CF9E40222B602D8B001D2C13 /* ContentView.swift */,
@@ -140,6 +145,31 @@
 				CF9E404B2B603227001D2C13 /* ServiceRequest.swift */,
 				CF9E404D2B60325B001D2C13 /* RequestError.swift */,
 				CF9E404F2B603315001D2C13 /* Router.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		CF9E40512B6039D0001D2C13 /* Hero */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E40552B603DC7001D2C13 /* Service */,
+				CF9E40522B6039D9001D2C13 /* Model */,
+			);
+			path = Hero;
+			sourceTree = "<group>";
+		};
+		CF9E40522B6039D9001D2C13 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E40532B603A24001D2C13 /* HeroModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CF9E40552B603DC7001D2C13 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E40562B603DDA001D2C13 /* HeroService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -274,11 +304,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF9E40572B603DDA001D2C13 /* HeroService.swift in Sources */,
 				CF9E404E2B60325B001D2C13 /* RequestError.swift in Sources */,
 				CF9E40232B602D8B001D2C13 /* ContentView.swift in Sources */,
 				CF9E40502B603315001D2C13 /* Router.swift in Sources */,
 				CF9E40212B602D8B001D2C13 /* Marvel_SwiftUIApp.swift in Sources */,
 				CF9E404C2B603228001D2C13 /* ServiceRequest.swift in Sources */,
+				CF9E40542B603A24001D2C13 /* HeroModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
