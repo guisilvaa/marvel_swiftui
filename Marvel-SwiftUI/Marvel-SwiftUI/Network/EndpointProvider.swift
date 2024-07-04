@@ -27,7 +27,7 @@ extension EndpointProvider {
     var timeStamp: String { formatTimestamp() }
 
     var baseURL: String {
-        return "https://gateway.marvel.com:443/v1/public"
+        return "http://gateway.marvel.com"
     }
 
     var token: String {
@@ -37,7 +37,7 @@ extension EndpointProvider {
     func asURLRequest() throws -> URLRequest {
 
         var urlComponents = URLComponents(string: baseURL)
-        urlComponents?.path = "/\(path)"
+        urlComponents?.path = "/v1/public/\(path)"
         
         if let queryItems = queryItems {
             urlComponents?.queryItems = queryItems

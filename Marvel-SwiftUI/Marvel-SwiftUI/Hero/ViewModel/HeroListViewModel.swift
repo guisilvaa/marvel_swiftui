@@ -9,8 +9,29 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class HeroListViewModel {
+final class HeroListViewModel: ObservableObject {
  
     @Published var heroes: [Hero] = []
-    @Published var isLoading: Bool = true
+    @Published var error: Error?
+    
+    private var service = HeroService()
+    
+    init(mockable: Bool = false) {
+        /*if mockable {
+            let mock = MockApiClient().loadJSON(filename: NotificationApi.notifications(page: 1).mockFile!,
+                                                type: NotificationsModel.self)
+            self.notifications = mock.items
+        }*/
+    }
+    
+    func fetchHeroes() async {
+        do {
+            let heroesModel = try await service.heroes()
+            heroes = heroesModel.data?.results ?? []
+            
+        } catch let error {
+            self.error = error
+        }
+    }
 }
+
