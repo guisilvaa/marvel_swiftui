@@ -7,8 +7,16 @@
 
 import Foundation
 
-struct HeroService: HTTPClient {
-    func getHeroes(offset: String = "0", limit: String = "10") async throws -> HeroDataWrapper {
-        return try await sendRequest(endpoint: .heroes(offset: offset), responseModel: HeroDataWrapper.self)
+final class HeroService {
+    
+    let apiClient: ApiProtocol
+    
+    init(apiClient: ApiProtocol = ApiClient()) {
+        self.apiClient = apiClient
+    }
+    
+    func heroes(offset: String = "0", limit: String = "10") async throws -> HeroDataWrapper {
+        try await apiClient.asyncRequest(endpoint: HeroApi.heroes(offset: offset, limit: limit),
+                                         responseModel: HeroDataWrapper.self)
     }
 }
