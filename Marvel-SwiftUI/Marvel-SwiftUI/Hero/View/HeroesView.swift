@@ -9,11 +9,20 @@ import SwiftUI
 
 struct HeroesView: View {
     
+    @EnvironmentObject var router: Router
+    
     @ObservedObject var viewModel: HeroListViewModel = HeroListViewModel()
     
+    @State private var heroSelected: Hero?
+    
     var body: some View {
-        List(viewModel.heroes, id: \.id) { hero in
+        List(viewModel.heroes,
+             selection: $heroSelected) { hero in
             HeroItemView(hero: hero)
+                .contentShape(Rectangle())
+                         .onTapGesture {
+                             router.navigateTo(.heroDetail(heroId: hero.id ?? 0))
+                         }
         }
         .task {
             await viewModel.fetchHeroes()

@@ -11,7 +11,7 @@ final class Router: ObservableObject {
     
     enum Route: Hashable {
         case heroes
-        case heroDetail
+        case heroDetail(heroId: Int)
     }
     
     @Published var path: NavigationPath = NavigationPath()
@@ -19,9 +19,9 @@ final class Router: ObservableObject {
     @ViewBuilder func view(for route: Route) -> some View {
         switch route {
         case .heroes:
-            ContentView() //TODO
-        case .heroDetail:
-            ContentView() //TODO
+            HeroesView()
+        case .heroDetail(heroId: let heroId):
+            HeroDetailView(heroId: heroId)
         }
     }
     

@@ -19,4 +19,9 @@ final class HeroService {
         try await apiClient.asyncRequest(endpoint: HeroApi.heroes(offset: offset, limit: limit),
                                          responseModel: HeroDataWrapper.self)
     }
+    
+    func heroDetail(heroId: Int) async throws -> HeroDataWrapper {
+        try await apiClient.asyncRequest(endpoint: HeroApi.heroDetail(heroId: heroId),
+                                         responseModel: HeroDataWrapper.self)
+    }
 }

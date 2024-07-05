@@ -42,7 +42,7 @@ final class ApiClient: ApiProtocol {
         guard let response = response as? HTTPURLResponse else {
             throw ApiError(code: "-3", 
                            description: "Invalid HTTP response",
-                           userMessage: "UNKNOWN_SERVER_ERROR")
+                           userMessage: "UNKNOWN_SERVER_ERROR", message: "")
         }
         switch response.statusCode {
         case 200...299:
@@ -56,10 +56,11 @@ final class ApiClient: ApiProtocol {
                 throw ApiError(error: .parse)
             }
         default:
-            guard let decodedError = try? decoder.decode(ApiError.self, from: data) else {
-                throw ApiError(code: "-4", 
+            guard let string = String(data: data, encoding: .utf8),
+                  let decodedError = try? decoder.decode(ApiError.self, from: data) else {
+                throw ApiError(code: "-4",
                                description: "Unknown backend error. Parse api error ",
-                               userMessage: "UNKNOWN_SERVER_ERROR")
+                               userMessage: "UNKNOWN_SERVER_ERROR", message: "")
                
             } //TODO Handle expired token
             /*if response.statusCode == 403 && decodedError.errorCode == KnownErrors.ErrorCode.expiredToken.rawValue {

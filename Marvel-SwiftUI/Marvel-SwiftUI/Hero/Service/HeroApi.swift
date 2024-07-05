@@ -9,19 +9,19 @@ import Foundation
 
 enum HeroApi: EndpointProvider {
     case heroes(offset: String, limit: String)
+    case heroDetail(heroId: Int)
     
     var path: String {
         switch self {
         case .heroes:
             "/characters"
+        case .heroDetail(heroId: let heroId):
+            "/characters/\(heroId)"
         }
     }
     
     var method: RequestMethod {
-        switch self {
-        case .heroes:
-            .get
-        }
+        .get
     }
     
     var queryItems: [URLQueryItem]? {
@@ -29,6 +29,8 @@ enum HeroApi: EndpointProvider {
         case .heroes(offset: let offset, limit: let limit):
             [URLQueryItem(name: "offset", value: offset),
              URLQueryItem(name: "limit", value: limit)]
+        default:
+            nil
         }
     }
     
@@ -40,6 +42,8 @@ enum HeroApi: EndpointProvider {
         switch self {
         case .heroes:
             "heroes_response"
+        case .heroDetail:
+            "hero_detail_response"
         }
     }
 }

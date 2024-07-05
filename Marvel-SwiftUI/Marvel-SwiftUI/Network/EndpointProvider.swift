@@ -37,17 +37,18 @@ extension EndpointProvider {
     func asURLRequest() throws -> URLRequest {
 
         var urlComponents = URLComponents(string: baseURL)
-        urlComponents?.path = "/v1/public/\(path)"
+        urlComponents?.path = "/v1/public\(path)"
+        
+        urlComponents?.queryItems = [URLQueryItem(name: "ts", value: timeStamp),
+                                     URLQueryItem(name: "apikey", value: publicKey),
+                                     URLQueryItem(name: "hash", value: hash)]
         
         if let queryItems = queryItems {
-            urlComponents?.queryItems = queryItems
+            urlComponents?.queryItems?.append(contentsOf: queryItems)
         }
-        urlComponents?.queryItems?.append(contentsOf: [URLQueryItem(name: "ts", value: timeStamp),
-                                                       URLQueryItem(name: "apikey", value: publicKey),
-                                                       URLQueryItem(name: "hash", value: hash),])
         
         guard let url = urlComponents?.url else {
-            throw ApiError(code: "-1", description: "Invalid url", userMessage: "UNKNOWN_SERVER_ERROR")
+            throw ApiError(code: "-1", description: "Invalid url", userMessage: "UNKNOWN_SERVER_ERROR", message: "")
         }
 
         var urlRequest = URLRequest(url: url)
@@ -63,7 +64,7 @@ extension EndpointProvider {
             do {
                 urlRequest.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
             } catch {
-                throw ApiError(code: "-2", description: "Error encoding http body", userMessage: "UNKNOWN_SERVER_ERROR")
+                throw ApiError(code: "-2", description: "Error encoding http body", userMessage: "UNKNOWN_SERVER_ERROR", message: "")
             }
         }
         

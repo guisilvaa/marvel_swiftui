@@ -21,7 +21,18 @@ struct HeroDataContainer: Codable {
     var results: [Hero]?
 }
 
-struct Hero: Codable {
+struct Hero: Codable, Hashable, Identifiable {
+    var identifier: String {
+        return UUID().uuidString
+    }
+        
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(identifier)
+    }
+    
+    static func == (lhs: Hero, rhs: Hero) -> Bool {
+        return lhs.id == rhs.id
+    }
     
     var id: Int?
     var name: String?
