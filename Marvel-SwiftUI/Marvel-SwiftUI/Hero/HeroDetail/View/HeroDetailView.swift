@@ -24,5 +24,8 @@ struct HeroDetailView: View {
 }
 
 #Preview {
-    HeroDetailView(heroId: 1)
+    let viewModel = HeroDetailViewModel(heroId: 1, mockable: true)
+    var view = HeroDetailView(heroId: 1)
+    view.viewModel = viewModel
+    return view
 }

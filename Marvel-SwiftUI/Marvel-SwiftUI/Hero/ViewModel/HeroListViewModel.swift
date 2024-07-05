@@ -17,11 +17,11 @@ final class HeroListViewModel: ObservableObject {
     private var service = HeroService()
     
     init(mockable: Bool = false) {
-        /*if mockable {
-            let mock = MockApiClient().loadJSON(filename: NotificationApi.notifications(page: 1).mockFile!,
-                                                type: NotificationsModel.self)
-            self.notifications = mock.items
-        }*/
+        if mockable {
+            let mock = MockApiClient().loadJSON(filename: HeroApi.heroes(offset: "0", limit: "10").mockFile!,
+                                                type: HeroDataWrapper.self)
+            self.heroes = mock.data?.results ?? []
+        }
     }
     
     func fetchHeroes() async {

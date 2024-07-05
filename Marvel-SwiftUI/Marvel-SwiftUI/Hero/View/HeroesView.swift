@@ -45,5 +45,5 @@ struct HeroItemView: View {
 }
 
 #Preview {
-    HeroesView()
+    HeroesView(viewModel: HeroListViewModel(mockable: true))
 }
