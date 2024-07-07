@@ -10,9 +10,9 @@ import SwiftUI
 
 @MainActor
 final class HeroDetailViewModel: ObservableObject {
-    @Published var hero: Hero?
-    @Published var error: Error?
-    @Published var comics: [ComicModel] = []
+   
+    @Published var result: AsyncResultState<Hero?> = .loading
+    @Published var comicsResult: AsyncResultState<[ComicModel]> = .loading
     
     private var service = HeroService()
     private var heroId: Int
@@ -25,27 +25,29 @@ final class HeroDetailViewModel: ObservableObject {
                                                 type: HeroDataWrapper.self)
             let comicsMock = MockApiClient().loadJSON(filename: HeroApi.characterComics(characterId: heroId, offset: "0", limit: "10").mockFile!,
                                                 type: ComicDataWrapper.self)
-            self.hero = mock.data?.results?.first
-            self.comics = comicsMock.data?.results ?? []
+            result = .success(mock.data?.results?.first)
+            comicsResult = .success(comicsMock.data?.results ?? [])
         }
     }
     
     func fetchHeroDetail() async {
+        result = .loading
         do {
             let heroesModel = try await service.heroDetail(heroId: self.heroId)
-            hero = heroesModel.data?.results?.first
+            result = .success(heroesModel.data?.results?.first)
             await fetchCharacterComics()
         } catch let error {
-            self.error = error
+            result = .failure(error)
         }
     }
     
     func fetchCharacterComics() async {
+        comicsResult = .loading
         do {
             let comicsModel = try await service.characterComics(characterId: self.heroId)
-            comics = comicsModel.data?.results ?? []
+            comicsResult = .success(comicsModel.data?.results ?? [])
         } catch let error {
-            self.error = error
+            comicsResult = .failure(error)
         }
     }
 }

@@ -10,18 +10,22 @@ import SwiftUI
 struct HeroDetailView: View {
     @ObservedObject var viewModel: HeroDetailViewModel
     
-    private let headerImageHeight: CGFloat = 180
+    private let headerImageHeight: CGFloat = 250
+    
+    private var character: Hero?
     
     init(heroId: Int) {
         viewModel = HeroDetailViewModel(heroId: heroId)
     }
     
     var body: some View {
-        ScrollView {
-            VStack() {
-                headerImageView
-                characterDescriptionView
-                comicsView
+        AsyncResultStateView(result: viewModel.result) { character in
+            ScrollView {
+                VStack() {
+                    headerImageView(imageUrl: character?.thumbnail?.imagePath ?? "")
+                    characterDescriptionView(character)
+                    comicsView(comicsAvailable: character?.comics?.available ?? 0)
+                }
             }
         }
         .task {
@@ -30,8 +34,8 @@ struct HeroDetailView: View {
         .navigationTitle("Detail")
     }
     
-    private var headerImageView: some View {
-        AsyncImage(url: URL(string: viewModel.hero?.thumbnail?.imagePath ?? "")) { photo in
+    private func headerImageView(imageUrl: String) -> some View {
+        AsyncImage(url: URL(string: imageUrl)) { photo in
             photo
                 .resizable()
                 .frame(height: headerImageHeight)
@@ -50,29 +54,31 @@ struct HeroDetailView: View {
         }
     }
     
-    private var characterDescriptionView: some View {
+    private func characterDescriptionView(_ character: Hero?) -> some View {
         LazyVStack() {
-            Text(viewModel.hero?.name ?? "")
+            Text(character?.name ?? "")
                 .font(.system(.largeTitle, weight: .bold))
                 .padding([.vertical], 10)
             
-            Text(viewModel.hero?.description ?? "")
+            Text(character?.description ?? "")
                 .font(.body)
                 .padding([.bottom], 10)
         }
         .padding(.horizontal, 20)
     }
     
-    private var comicsView: some View {
+    private func comicsView(comicsAvailable: Int) -> some View {
         VStack() {
-            let comicsAvailable = viewModel.hero?.comics?.available ?? 0
             Text("Comics (\(comicsAvailable))")
                 .font(.system(.title2, weight: .bold))
                 .padding([.bottom], 5)
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack {
-                    ForEach(viewModel.comics) { item in
-                        comicItemView(model: item)
+            
+            AsyncResultStateView(result: viewModel.comicsResult) { comics in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach(comics) { item in
+                            comicItemView(model: item)
+                        }
                     }
                 }
             }
