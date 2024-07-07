@@ -10,18 +10,18 @@ import SwiftUI
 final class Router: ObservableObject {
     
     enum Route: Hashable {
-        case heroes
-        case heroDetail(heroId: Int)
+        case characters
+        case characterDetail(characterId: Int)
     }
     
     @Published var path: NavigationPath = NavigationPath()
     
     @ViewBuilder func view(for route: Route) -> some View {
         switch route {
-        case .heroes:
-            HeroesView()
-        case .heroDetail(heroId: let heroId):
-            HeroDetailView(heroId: heroId)
+        case .characters:
+            CharactersListView()
+        case .characterDetail(characterId: let characterId):
+            CharacterDetailView(characterId: characterId)
         }
     }
     

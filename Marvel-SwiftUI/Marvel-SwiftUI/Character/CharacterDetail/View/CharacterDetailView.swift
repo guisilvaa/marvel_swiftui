@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct HeroDetailView: View {
-    @ObservedObject var viewModel: HeroDetailViewModel
+struct CharacterDetailView: View {
+    @ObservedObject var viewModel: CharacterDetailViewModel
     
     private let headerImageHeight: CGFloat = 250
     
-    private var character: Hero?
+    private var character: CharacterModel?
     
-    init(heroId: Int) {
-        viewModel = HeroDetailViewModel(heroId: heroId)
+    init(characterId: Int) {
+        viewModel = CharacterDetailViewModel(characterId: characterId)
     }
     
     var body: some View {
@@ -29,7 +29,7 @@ struct HeroDetailView: View {
             }
         }
         .task {
-            await viewModel.fetchHeroDetail()
+            await viewModel.fetchCharacterDetail()
         }
         .navigationTitle("Detail")
     }
@@ -54,7 +54,7 @@ struct HeroDetailView: View {
         }
     }
     
-    private func characterDescriptionView(_ character: Hero?) -> some View {
+    private func characterDescriptionView(_ character: CharacterModel?) -> some View {
         LazyVStack() {
             Text(character?.name ?? "")
                 .font(.system(.largeTitle, weight: .bold))
@@ -116,8 +116,8 @@ struct HeroDetailView: View {
 }
 
 #Preview {
-    let viewModel = HeroDetailViewModel(heroId: 1, mockable: true)
-    var view = HeroDetailView(heroId: 1)
+    let viewModel = CharacterDetailViewModel(characterId: 1, mockable: true)
+    var view = CharacterDetailView(characterId: 1)
     view.viewModel = viewModel
     return view
 }

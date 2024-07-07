@@ -7,37 +7,37 @@
 
 import SwiftUI
 
-struct HeroesView: View {
+struct CharactersListView: View {
     
     @EnvironmentObject var router: Router
     
-    @ObservedObject var viewModel: HeroListViewModel = HeroListViewModel()
+    @ObservedObject var viewModel: CharactersListViewModel = CharactersListViewModel()
     
     var body: some View {
         AsyncResultStateView(result: viewModel.result) { characters in
-            List(characters) { hero in
-                HeroItemView(hero: hero)
+            List(characters) { character in
+                CharacterItemView(character: character)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        router.navigateTo(.heroDetail(heroId: hero.id ?? 0))
+                        router.navigateTo(.characterDetail(characterId: character.id ?? 0))
                     }
             }
         }
         .task {
-            await viewModel.fetchHeroes()
+            await viewModel.fetchCharacters()
         }
-        .navigationTitle("Heroes")
+        .navigationTitle("Characters")
     }
 }
 
-struct HeroItemView: View {
+struct CharacterItemView: View {
     
-    var hero: Hero
+    var character: CharacterModel
     
     private let cardHeight: CGFloat = 180
     
     var body: some View {
-        AsyncImage(url: URL(string: hero.thumbnail?.imagePath ?? "")) { photo in
+        AsyncImage(url: URL(string: character.thumbnail?.imagePath ?? "")) { photo in
             photo
                 .resizable()
                 .frame(height: cardHeight)
@@ -48,7 +48,7 @@ struct HeroItemView: View {
                         .cornerRadius(20)
                         
                         VStack {
-                            Text(hero.name ?? "")
+                            Text(character.name ?? "")
                                 .foregroundColor(.white)
                                 .bold()
                                 .lineLimit(1)
@@ -75,5 +75,5 @@ struct HeroItemView: View {
 }
 
 #Preview {
-    HeroesView(viewModel: HeroListViewModel(mockable: true))
+    CharactersListView(viewModel: CharactersListViewModel(mockable: true))
 }

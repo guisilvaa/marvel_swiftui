@@ -7,21 +7,21 @@
 
 import Foundation
 
-struct HeroDataWrapper: Codable {
+struct CharacterDataWrapper: Codable {
     
-    var data: HeroDataContainer?
+    var data: CharacterDataContainer?
 }
 
-struct HeroDataContainer: Codable {
+struct CharacterDataContainer: Codable {
     
     var offset: Int?
     var limit: Int?
     var total: Int?
     var count: Int?
-    var results: [Hero]?
+    var results: [CharacterModel]?
 }
 
-struct Hero: Codable, Hashable, Identifiable {
+struct CharacterModel: Codable, Hashable, Identifiable {
     var identifier: String {
         return UUID().uuidString
     }
@@ -30,7 +30,7 @@ struct Hero: Codable, Hashable, Identifiable {
         return hasher.combine(identifier)
     }
     
-    static func == (lhs: Hero, rhs: Hero) -> Bool {
+    static func == (lhs: CharacterModel, rhs: CharacterModel) -> Bool {
         return lhs.id == rhs.id
     }
     
@@ -38,10 +38,10 @@ struct Hero: Codable, Hashable, Identifiable {
     var name: String?
     var description: String?
     var thumbnail: ThumbImage?
-    var comics: HeroAppearence?
-    var stories: HeroAppearence?
-    var events: HeroAppearence?
-    var series: HeroAppearence?
+    var comics: CharacterAppearence?
+    var stories: CharacterAppearence?
+    var events: CharacterAppearence?
+    var series: CharacterAppearence?
 }
 
 struct ThumbImage: Codable {
@@ -57,7 +57,7 @@ struct ThumbImage: Codable {
     }
 }
 
-struct HeroAppearence: Codable {
+struct CharacterAppearence: Codable {
     
     var available: Int = 0
     var returned: Int = 0

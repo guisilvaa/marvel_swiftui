@@ -12,7 +12,7 @@ struct Marvel_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
             RouterView {
-                HeroesView()
+                CharactersListView()
             }
         }
     }
