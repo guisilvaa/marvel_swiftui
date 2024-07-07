@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct AsyncResultStateView<Success, Content: View>: View {
     let result: AsyncResultState<Success>
@@ -20,7 +21,7 @@ struct AsyncResultStateView<Success, Content: View>: View {
     var body: some View {
         switch result {
             case .empty:
-                EmptyView()
+                Text("No results found!")
             case .loading:
                 ProgressView()
             case let .success(value):
