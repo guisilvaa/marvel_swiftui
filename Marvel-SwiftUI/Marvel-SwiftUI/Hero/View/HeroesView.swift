@@ -35,12 +35,43 @@ struct HeroItemView: View {
     
     var hero: Hero
     
+    private let cardHeight: CGFloat = 180
+    
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
-            
-            Text(hero.name ?? "")
+        AsyncImage(url: URL(string: hero.thumbnail?.imagePath ?? "")) { photo in
+            photo
+                .resizable()
+                .frame(height: cardHeight)
+                .cornerRadius(20)
+                .overlay(
+                    ZStack {
+                        LinearGradient(gradient: Gradient(colors: [.clear, .clear, .clear, .black.opacity(0.8)]), startPoint: .bottom, endPoint: .top)
+                        .cornerRadius(20)
+                        
+                        VStack {
+                            Text(hero.name ?? "")
+                                .foregroundColor(.white)
+                                .bold()
+                                .lineLimit(1)
+                                .padding(.top, 4)
+                                .padding(.horizontal, 10)
+                            
+                            Spacer()
+                        }
+                    }
+                )
+        } placeholder: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(height: cardHeight)
+                    .foregroundColor(.gray)
+                Image(systemName: "person")
+                    .resizable()
+                    .frame(width: 70, height: 70)
+                    .padding()
+                    .foregroundColor(.black)
+            }
         }
-        .padding(.vertical, 8)
     }
 }
 

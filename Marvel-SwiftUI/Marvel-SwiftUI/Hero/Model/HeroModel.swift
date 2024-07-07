@@ -37,7 +37,7 @@ struct Hero: Codable, Hashable, Identifiable {
     var id: Int?
     var name: String?
     var description: String?
-    var thumbImage: ThumbImage?
+    var thumbnail: ThumbImage?
     var comics: HeroAppearence?
     var stories: HeroAppearence?
     var events: HeroAppearence?
@@ -47,9 +47,14 @@ struct Hero: Codable, Hashable, Identifiable {
 struct ThumbImage: Codable {
     
     var path: String = ""
-    var imageExtension: String = ""
+    var thumbnailExtension: String = ""
     
-    var imagePath: String { "\(path).\(imageExtension)" }
+    var imagePath: String { "\(path).\(thumbnailExtension)" }
+    
+    enum CodingKeys: String, CodingKey {
+        case path
+        case thumbnailExtension = "extension"
+    }
 }
 
 struct HeroAppearence: Codable {
