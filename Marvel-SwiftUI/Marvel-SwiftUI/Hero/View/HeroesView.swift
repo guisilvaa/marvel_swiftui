@@ -13,16 +13,15 @@ struct HeroesView: View {
     
     @ObservedObject var viewModel: HeroListViewModel = HeroListViewModel()
     
-    @State private var heroSelected: Hero?
-    
     var body: some View {
-        List(viewModel.heroes,
-             selection: $heroSelected) { hero in
-            HeroItemView(hero: hero)
-                .contentShape(Rectangle())
-                         .onTapGesture {
-                             router.navigateTo(.heroDetail(heroId: hero.id ?? 0))
-                         }
+        AsyncResultStateView(result: viewModel.result) { characters in
+            List(characters) { hero in
+                HeroItemView(hero: hero)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        router.navigateTo(.heroDetail(heroId: hero.id ?? 0))
+                    }
+            }
         }
         .task {
             await viewModel.fetchHeroes()

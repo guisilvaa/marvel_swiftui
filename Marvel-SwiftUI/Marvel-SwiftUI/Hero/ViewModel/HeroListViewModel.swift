@@ -11,8 +11,7 @@ import SwiftUI
 @MainActor
 final class HeroListViewModel: ObservableObject {
  
-    @Published var heroes: [Hero] = []
-    @Published var error: Error?
+    @Published var result: AsyncResultState<[Hero]> = .loading
     
     private var service = HeroService()
     
@@ -20,17 +19,17 @@ final class HeroListViewModel: ObservableObject {
         if mockable {
             let mock = MockApiClient().loadJSON(filename: HeroApi.heroes(offset: "0", limit: "10").mockFile!,
                                                 type: HeroDataWrapper.self)
-            self.heroes = mock.data?.results ?? []
+            result = .success(mock.data?.results ?? [])
         }
     }
     
     func fetchHeroes() async {
+        result = .loading
         do {
             let heroesModel = try await service.heroes()
-            heroes = heroesModel.data?.results ?? []
-            
+            result = .success(heroesModel.data?.results ?? [])
         } catch let error {
-            self.error = error
+            result = .failure(error)
         }
     }
 }
