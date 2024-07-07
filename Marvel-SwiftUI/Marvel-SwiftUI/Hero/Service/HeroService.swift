@@ -24,4 +24,11 @@ final class HeroService {
         try await apiClient.asyncRequest(endpoint: HeroApi.heroDetail(heroId: heroId),
                                          responseModel: HeroDataWrapper.self)
     }
+    
+    func characterComics(characterId: Int,
+                         offset: String = "0", 
+                         limit: String = "10") async throws -> ComicDataWrapper {
+        try await apiClient.asyncRequest(endpoint: HeroApi.characterComics(characterId: characterId, offset: offset, limit: limit),
+                                         responseModel: ComicDataWrapper.self)
+    }
 }

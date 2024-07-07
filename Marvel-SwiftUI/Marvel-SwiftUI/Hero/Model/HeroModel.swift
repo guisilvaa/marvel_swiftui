@@ -61,4 +61,13 @@ struct HeroAppearence: Codable {
     
     var available: Int = 0
     var returned: Int = 0
+    var items: [CharacterAppearenceItemModel]
+}
+
+struct CharacterAppearenceItemModel: Codable, Identifiable {
+    var id: String {
+        return UUID().uuidString
+    }
+    
+    var name, resourceURI: String
 }
