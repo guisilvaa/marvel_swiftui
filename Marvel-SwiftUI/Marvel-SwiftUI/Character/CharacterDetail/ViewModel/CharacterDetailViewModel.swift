@@ -14,9 +14,10 @@ final class CharacterDetailViewModel: ObservableObject {
     @Published var result: AsyncResultState<CharacterModel?> = .loading
     @Published var comicsResult: AsyncResultState<[ComicModel]> = .loading
     
-    private var service = CharacterService()
+    var service = CharacterService()
     private var characterId: Int
-    private var comics: [ComicModel] = []
+    var character: CharacterModel?
+    var comics: [ComicModel] = []
     private var currentOffset = 0
     private var totalComics = 0
     private let limit = 10
@@ -38,7 +39,8 @@ final class CharacterDetailViewModel: ObservableObject {
         result = .loading
         do {
             let charactersModel = try await service.characterDetail(characterId: self.characterId)
-            result = .success(charactersModel.data?.results?.first)
+            character = charactersModel.data?.results?.first
+            result = .success(character)
             await fetchCharacterComics()
         } catch let error {
             result = .failure(error)

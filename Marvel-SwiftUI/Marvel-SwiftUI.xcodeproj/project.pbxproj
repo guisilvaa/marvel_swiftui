@@ -18,6 +18,7 @@
 		CF9E40572B603DDA001D2C13 /* CharacterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E40562B603DDA001D2C13 /* CharacterService.swift */; };
 		CF9E405A2B603F4C001D2C13 /* CharactersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E40592B603F4C001D2C13 /* CharactersListViewModel.swift */; };
 		CFC283782C3C65B20029F1A9 /* CharactersListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC283772C3C65B20029F1A9 /* CharactersListViewModelTest.swift */; };
+		CFC2837A2C3C66FD0029F1A9 /* CharacterDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC283792C3C66FD0029F1A9 /* CharacterDetailViewModelTest.swift */; };
 		CFF9B9752C360B6F00C35D93 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF9B96E2C360B6F00C35D93 /* ApiClient.swift */; };
 		CFF9B9762C360B6F00C35D93 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF9B96F2C360B6F00C35D93 /* ApiError.swift */; };
 		CFF9B9772C360B6F00C35D93 /* ApiErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF9B9702C360B6F00C35D93 /* ApiErrorType.swift */; };
@@ -74,6 +75,7 @@
 		CF9E40562B603DDA001D2C13 /* CharacterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterService.swift; sourceTree = "<group>"; };
 		CF9E40592B603F4C001D2C13 /* CharactersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewModel.swift; sourceTree = "<group>"; };
 		CFC283772C3C65B20029F1A9 /* CharactersListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewModelTest.swift; sourceTree = "<group>"; };
+		CFC283792C3C66FD0029F1A9 /* CharacterDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModelTest.swift; sourceTree = "<group>"; };
 		CFF9B96E2C360B6F00C35D93 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		CFF9B96F2C360B6F00C35D93 /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		CFF9B9702C360B6F00C35D93 /* ApiErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiErrorType.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				CF9E40312B602D8C001D2C13 /* Marvel_SwiftUITests.swift */,
 				CFC283772C3C65B20029F1A9 /* CharactersListViewModelTest.swift */,
+				CFC283792C3C66FD0029F1A9 /* CharacterDetailViewModelTest.swift */,
 			);
 			path = "Marvel-SwiftUITests";
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF9E40322B602D8C001D2C13 /* Marvel_SwiftUITests.swift in Sources */,
+				CFC2837A2C3C66FD0029F1A9 /* CharacterDetailViewModelTest.swift in Sources */,
 				CFF9B99E2C3AEB1500C35D93 /* ComicModel.swift in Sources */,
 				CFC283782C3C65B20029F1A9 /* CharactersListViewModelTest.swift in Sources */,
 			);
