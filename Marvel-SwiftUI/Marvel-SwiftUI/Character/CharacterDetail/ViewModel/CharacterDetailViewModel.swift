@@ -16,6 +16,10 @@ final class CharacterDetailViewModel: ObservableObject {
     
     private var service = CharacterService()
     private var characterId: Int
+    private var comics: [ComicModel] = []
+    private var currentOffset = 0
+    private var totalComics = 0
+    private let limit = 10
     
     init(characterId: Int, mockable: Bool = false) {
         self.characterId = characterId
@@ -23,7 +27,7 @@ final class CharacterDetailViewModel: ObservableObject {
         if mockable {
             let mock = MockApiClient().loadJSON(filename: CharacterApi.characterDetail(characterId: characterId).mockFile!,
                                                 type: CharacterDataWrapper.self)
-            let comicsMock = MockApiClient().loadJSON(filename: CharacterApi.characterComics(characterId: characterId, offset: "0", limit: "10").mockFile!,
+            let comicsMock = MockApiClient().loadJSON(filename: CharacterApi.characterComics(characterId: characterId, offset: "\(currentOffset)", limit: "\(limit)").mockFile!,
                                                 type: ComicDataWrapper.self)
             result = .success(mock.data?.results?.first)
             comicsResult = .success(comicsMock.data?.results ?? [])
@@ -41,13 +45,29 @@ final class CharacterDetailViewModel: ObservableObject {
         }
     }
     
-    func fetchCharacterComics() async {
-        comicsResult = .loading
+    func fetchCharacterComics(isLoadingMore: Bool = false) async {
+        if !isLoadingMore {
+            comicsResult = .loading
+        }
+        
         do {
-            let comicsModel = try await service.characterComics(characterId: self.characterId)
-            comicsResult = .success(comicsModel.data?.results ?? [])
+            let comicsModel = try await service.characterComics(characterId: self.characterId, offset: "\(currentOffset)")
+            let results = comicsModel.data?.results ?? []
+            comics.append(contentsOf: results)
+            totalComics = comicsModel.data?.total ?? 0
+            comicsResult = .success(comics)
         } catch let error {
             comicsResult = .failure(error)
+        }
+    }
+    
+    func loadMoreComics(currentComic: ComicModel) async {
+        if let lastItem = self.comics.last, lastItem.id == currentComic.id,
+           self.comics.count <= totalComics {
+            currentOffset += limit
+            await fetchCharacterComics(isLoadingMore: true)
+        } else {
+            comicsResult = .success(comics)
         }
     }
 }

@@ -24,7 +24,11 @@ struct CharacterDetailView: View {
                 VStack() {
                     headerImageView(imageUrl: character?.thumbnail?.imagePath ?? "")
                     characterDescriptionView(character)
-                    comicsView(comicsAvailable: character?.comics?.available ?? 0)
+                    
+                    if let comicsAvailable = character?.comics?.available,
+                       comicsAvailable > 0 {
+                        comicsView(comicsAvailable: comicsAvailable)
+                    }
                 }
             }
         }
@@ -55,7 +59,7 @@ struct CharacterDetailView: View {
     }
     
     private func characterDescriptionView(_ character: CharacterModel?) -> some View {
-        LazyVStack() {
+        VStack() {
             Text(character?.name ?? "")
                 .font(.system(.largeTitle, weight: .bold))
                 .padding([.vertical], 10)
@@ -78,6 +82,11 @@ struct CharacterDetailView: View {
                     LazyHStack {
                         ForEach(comics) { item in
                             comicItemView(model: item)
+                                .onAppear {
+                                    Task {
+                                        await viewModel.loadMoreComics(currentComic: item)
+                                    }
+                                }
                         }
                     }
                 }
@@ -96,7 +105,7 @@ struct CharacterDetailView: View {
             } placeholder: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(height: headerImageHeight)
+                        .frame(height: 200)
                         .foregroundColor(.gray)
                     Image(systemName: "person")
                         .resizable()
@@ -109,7 +118,6 @@ struct CharacterDetailView: View {
             Text(model.title ?? "")
                 .multilineTextAlignment(.center)
                 .font(.headline)
-                .frame(width: 150)
         }
         .padding([.leading], 10)
     }
