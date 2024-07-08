@@ -116,8 +116,10 @@ struct CharacterDetailView: View {
             }
             
             Text(model.title ?? "")
+                .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .font(.headline)
+                .frame(width: 150)
         }
         .padding([.leading], 10)
     }
