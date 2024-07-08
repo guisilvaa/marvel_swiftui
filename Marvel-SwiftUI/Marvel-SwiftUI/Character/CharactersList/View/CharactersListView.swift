@@ -21,6 +21,11 @@ struct CharactersListView: View {
                     .onTapGesture {
                         router.navigateTo(.characterDetail(characterId: character.id ?? 0))
                     }
+                    .onAppear {
+                        Task {
+                            await viewModel.loadMoreCharacters(currentCharacter: character)
+                        }
+                    }
             }
         }
         .task {
