@@ -13,8 +13,8 @@ final class CharactersListViewModel: ObservableObject {
  
     @Published var result: AsyncResultState<[CharacterModel]> = .loading
     
-    private var service = CharacterService()
-    private var characters: [CharacterModel] = []
+    var service = CharacterService()
+    var characters: [CharacterModel] = []
     private var currentOffset = 0
     private var totalCharacters = 0
     private let limit = 10

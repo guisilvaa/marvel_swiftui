@@ -1,20 +1,19 @@
 //
-//  Marvel_SwiftUITests.swift
+//  CharactersListViewModelTest.swift
 //  Marvel-SwiftUITests
 //
-//  Created by Guilherme Silva on 23/01/24.
+//  Created by Guilherme Silva on 08/07/24.
 //
 
 import XCTest
 @testable import Marvel_SwiftUI
 
-final class Marvel_SwiftUITests: XCTestCase {
-    
+final class CharactersListViewModelTest: XCTestCase {
+
     var viewModel: CharactersListViewModel!
     var mockApi: MockApiClient!
 
     @MainActor override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         try super.setUpWithError()
         
         viewModel = CharactersListViewModel()
@@ -26,19 +25,11 @@ final class Marvel_SwiftUITests: XCTestCase {
         try super.tearDownWithError()
         
         viewModel = nil
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        mockApi = nil
     }
 
-    @MainActor func testExample() async throws {
+    @MainActor func testFetchCharactersListSuccess() async throws {
         await viewModel.fetchCharacters()
         XCTAssertTrue(!viewModel.characters.isEmpty)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

@@ -17,6 +17,7 @@
 		CF9E40542B603A24001D2C13 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E40532B603A24001D2C13 /* CharacterModel.swift */; };
 		CF9E40572B603DDA001D2C13 /* CharacterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E40562B603DDA001D2C13 /* CharacterService.swift */; };
 		CF9E405A2B603F4C001D2C13 /* CharactersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E40592B603F4C001D2C13 /* CharactersListViewModel.swift */; };
+		CFC283782C3C65B20029F1A9 /* CharactersListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC283772C3C65B20029F1A9 /* CharactersListViewModelTest.swift */; };
 		CFF9B9752C360B6F00C35D93 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF9B96E2C360B6F00C35D93 /* ApiClient.swift */; };
 		CFF9B9762C360B6F00C35D93 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF9B96F2C360B6F00C35D93 /* ApiError.swift */; };
 		CFF9B9772C360B6F00C35D93 /* ApiErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF9B9702C360B6F00C35D93 /* ApiErrorType.swift */; };
@@ -39,7 +40,6 @@
 		CFF9B99E2C3AEB1500C35D93 /* ComicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF9B99C2C3AEB1500C35D93 /* ComicModel.swift */; };
 		CFF9B9A02C3AF09300C35D93 /* character_comics_response.json in Resources */ = {isa = PBXBuildFile; fileRef = CFF9B99F2C3AF09300C35D93 /* character_comics_response.json */; };
 		CFF9B9A12C3AF09300C35D93 /* character_comics_response.json in Resources */ = {isa = PBXBuildFile; fileRef = CFF9B99F2C3AF09300C35D93 /* character_comics_response.json */; };
-		CFF9B9A42C3B1EE300C35D93 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = CFF9B9A32C3B1EE300C35D93 /* Shimmer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +73,7 @@
 		CF9E40532B603A24001D2C13 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		CF9E40562B603DDA001D2C13 /* CharacterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterService.swift; sourceTree = "<group>"; };
 		CF9E40592B603F4C001D2C13 /* CharactersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewModel.swift; sourceTree = "<group>"; };
+		CFC283772C3C65B20029F1A9 /* CharactersListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewModelTest.swift; sourceTree = "<group>"; };
 		CFF9B96E2C360B6F00C35D93 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		CFF9B96F2C360B6F00C35D93 /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		CFF9B9702C360B6F00C35D93 /* ApiErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiErrorType.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFF9B9A42C3B1EE300C35D93 /* Shimmer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				CF9E40312B602D8C001D2C13 /* Marvel_SwiftUITests.swift */,
+				CFC283772C3C65B20029F1A9 /* CharactersListViewModelTest.swift */,
 			);
 			path = "Marvel-SwiftUITests";
 			sourceTree = "<group>";
@@ -343,7 +344,6 @@
 			);
 			name = "Marvel-SwiftUI";
 			packageProductDependencies = (
-				CFF9B9A32C3B1EE300C35D93 /* Shimmer */,
 			);
 			productName = "Marvel-SwiftUI";
 			productReference = CF9E401D2B602D8B001D2C13 /* Marvel-SwiftUI.app */;
@@ -497,6 +497,7 @@
 			files = (
 				CF9E40322B602D8C001D2C13 /* Marvel_SwiftUITests.swift in Sources */,
 				CFF9B99E2C3AEB1500C35D93 /* ComicModel.swift in Sources */,
+				CFC283782C3C65B20029F1A9 /* CharactersListViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,14 +832,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		CFF9B9A32C3B1EE300C35D93 /* Shimmer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFF9B9A22C3B1EE300C35D93 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
-			productName = Shimmer;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CF9E40152B602D8B001D2C13 /* Project object */;
 }
